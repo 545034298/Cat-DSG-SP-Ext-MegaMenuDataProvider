@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <Field 
+        ID="8410b679-5a75-421c-9f21-15d39a4388f4"
+        Name="catdsgspJSLinkIconography"
+        StaticName="catdsgspJSLinkIconography"
+        DisplayName="catdsgspJSLinkIconography" 
+        Type="Text"
+        Required="FALSE" 
+        MaxLength="255" 
+        Group="CatDsgSp Columns" >
+    </Field>
+
+    <Field 
+        ID="29564685-6413-492c-90a3-9efc0cb8ccf2"
+        Name="catdsgspJSLinkColorPicker"
+        StaticName="catdsgspJSLinkColorPicker"
+        DisplayName="catdsgspJSLinkColorPicker" 
+        Type="Text"
+        Required="FALSE" 
+        MaxLength="255" 
+        Group="CatDsgSp Columns">
+    </Field>
+
+    <Field 
+        ID="67660157-8380-4e36-bfe7-b3f2b7f82d43"
+        Name="catDsgSpMegaMenuColumnLocation"
+        StaticName="catDsgSpMegaMenuColumnLocation"
+        DisplayName="MegaMenu Column Location" 
+        Type="Number"
+        Required="TRUE" 
+        MaxLength="255" 
+        Min="1" 
+        Max="3"
+        Decimals="0"
+        Percentage="FALSE"
+        Group="CatDsgSp Columns">
+    </Field>
+
+    <Field 
+        ID="e3eb4bbe-aa02-4d40-ae8f-1afbab87854e"
+        Name="catdsgspMegaMenuOpenNewWindow"
+        StaticName="catdsgspMegaMenuOpenNewWindow"
+        DisplayName="MegaMenu Open in New Window" 
+        Type="Boolean"
+        Required="FALSE" 
+        Group="CatDsgSp Columns">
+        <Default>0</Default>
+    </Field>
+
+    <Field 
+        ID="7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f"
+        Name="catdsgspMegaMenuSortOrder"
+        StaticName="catdsgspMegaMenuSortOrder"
+        DisplayName="MegaMenu Sort Order" 
+        Type="Number"
+        Required="TRUE" 
+        MaxLength="255" 
+        Min="1" 
+        Max="3"
+        Decimals="0"
+        Percentage="FALSE"
+        Group="CatDsgSp Columns">
+    </Field>
+     
+    <Field 
+        ID="5b76500d-5174-4a34-b683-22468a1da5ee"
+        Name="catdsgspMegaMenuURL"
+        StaticName="catdsgspMegaMenuURL"
+        DisplayName="MegaMenu URL" 
+        Type="URL"
+        Required="FALSE" 
+        Format="Hyperlink"
+        Group="CatDsgSp Columns">
+    </Field>
+
+    <ContentType ID="0x0100B2C47C6727034C4B8B54B9725096850A" 
+                 Name="CatDsgSp MegaMenu Navigation Link" 
+                 Description="" 
+                 Group="CatDsgSp Content Types">
+        <FieldRefs>
+            <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}" />
+            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Hidden="true" />
+            <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}"  Required="true" />
+            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}"  Required="true" />
+            <FieldRef ID="{e3eb4bbe-aa02-4d40-ae8f-1afbab87854e}"  DisplayName="MegaMenu Open in New Window"/>
+            <FieldRef ID="{29564685-6413-492c-90a3-9efc0cb8ccf2}"  DisplayName="MegaMenu Color"/>
+            <FieldRef ID="{8410b679-5a75-421c-9f21-15d39a4388f4}"  DisplayName="MegaMenu Icon"/>
+        </FieldRefs>
+    </ContentType>
+
+    <ContentType ID="0x012000369E64E4632E664C943458C08457E03A" 
+                 Name="CatDsgSp MegaMenu Level One Folder" 
+                 Description="" 
+                 Group="CatDsgSp Content Types">
+        <FieldRefs>
+            <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}" />
+            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Hidden="true" />
+            <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}" Required="true" />
+            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}"/>
+        </FieldRefs>
+    </ContentType>
+
+    <ContentType ID="0x012000E08764FC400BE146873519BB055F989A" 
+                 Name="CatDsgSp MegaMenu Level Two Folder" 
+                 Description="" 
+                 Group="CatDsgSp Content Types">
+        <FieldRefs>
+            <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}" />
+            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}"  Hidden="true" />
+            <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}"  Required="true" />
+            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}" />
+            <FieldRef ID="{67660157-8380-4e36-bfe7-b3f2b7f82d43}" Required="true" />
+            <FieldRef ID="{29564685-6413-492c-90a3-9efc0cb8ccf2}"  DisplayName="MegaMenu Color"/>
+            <FieldRef ID="{8410b679-5a75-421c-9f21-15d39a4388f4}" DisplayName="MegaMenu Icon"/>
+        </FieldRefs>
+    </ContentType>
+    
+    <ListInstance
+            CustomSchema="schema.xml" 
+            FeatureId="00bfea71-de22-43b2-a848-c05709900100"
+            Title="MegaMenu" 
+            Description=""
+            TemplateType="100" 
+            Url="Lists/MegaMenu">
+    </ListInstance>
+</Elements>
