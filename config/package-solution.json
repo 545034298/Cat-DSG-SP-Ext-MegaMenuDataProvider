@@ -4,7 +4,7 @@
     "name": "Catapult Systems - Mega Menu Data Model",
     "id": "5bd500ea-9f1b-4242-96cc-5f58db3fe230",
     "version": "1.0.0.7",
-    "includeClientSideAssets": true,
+    "includeClientSideAssets": false,
     "skipFeatureDeployment": true,
     "features": [
       {

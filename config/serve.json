@@ -4,12 +4,12 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "pageUrl": "https://catsysdemo.sharepoint.com/sites/fusedevrogerzhangmegamenu004",
       "customActions": {
         "9f1019ee-a6b3-4f24-b1b5-106fccad202f": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
-            "testMessage": "Test message"
+            "megaMenuListName": "MegaMenu"
           }
         }
       }
@@ -20,7 +20,7 @@
         "9f1019ee-a6b3-4f24-b1b5-106fccad202f": {
           "location": "ClientSideExtension.ApplicationCustomizer",
           "properties": {
-            "testMessage": "Test message"
+            "megaMenuListName": "MegaMenu"
           }
         }
       }
