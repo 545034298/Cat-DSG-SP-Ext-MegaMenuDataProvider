@@ -11,7 +11,7 @@ import { Dialog } from '@microsoft/sp-dialog';
 import * as strings from 'CatDsgSpExt1001ExportMegaMenuCommandSetStrings';
 
 const LOG_SOURCE: string = 'CatDsgSpExt1001ExportMegaMenuCommandSet';
-import pnp, { Web, Folder } from "sp-pnp-js";
+import pnp, { Web, Folder, FieldUserSelectionMode } from "sp-pnp-js";
 /**
  * If your command set uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
@@ -77,41 +77,45 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
   public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
     switch (event.itemId) {
       case 'CATDSGSPCOMMAND_EXPORTMEGAMENU':
-        this.exportMegaMenu().then((value:any) => {
-          Dialog.alert(strings.CatDsgSpExt1001ExportMegaMenuSucceedMessage+':'+this.context.pageContext.site.serverRelativeUrl + this.properties.megaMenuJsonFileRelativeUri+'/'+this.properties.megaMenuJsonFileName);
-        }, (error)=> {
-          Dialog.alert(strings.CatDsgSpExt1001ExportMegaMenuFailedMessage+':'+this.context.pageContext.site.serverRelativeUrl + this.properties.megaMenuJsonFileRelativeUri+'/'+this.properties.megaMenuJsonFileName);
+        this.exportMegaMenu().then((value: any) => {
+          Dialog.alert(strings.CatDsgSpExt1001ExportMegaMenuSucceedMessage + ':' + this.context.pageContext.site.serverRelativeUrl + this.properties.megaMenuJsonFileRelativeUri + '/' + this.properties.megaMenuJsonFileName);
+        }, (error) => {
+          Dialog.alert(strings.CatDsgSpExt1001ExportMegaMenuFailedMessage + ':\r\n' + error);
         });
         break;
       default:
         throw new Error(strings.CatDsgSpExt1001ExportMegaMenuUnknownCommand);
     }
   }
-  
   protected exportMegaMenu(): Promise<any> {
-    return new Promise<any>((resolve,reject)=>{
-      this.getNestedMegaMenu().then((nestedMenu: any[]) => {
-        let DesktopJSON = this.util_GenerateDesktopJSON(nestedMenu);
-        let MobileJson = this.util_GenerateMobileJSON(nestedMenu);
-        let outputJSON = {
-          OutputDesktopJSON: DesktopJSON,
-          OutputMobileJSON: MobileJson
-        };
-        return outputJSON;
-      }).then((outputJSON) => {
-        let web = new Web(this.context.pageContext.site.absoluteUrl);
-        
-        web.getFolderByServerRelativePath(this.context.pageContext.site.serverRelativeUrl + this.properties.megaMenuJsonFileRelativeUri).files.add(this.properties.megaMenuJsonFileName, JSON.stringify(outputJSON)).then((result) => {
-          resolve(true);
+    return new Promise<any>((resolve, reject) => {
+      this.MakesureMegaMenuJsonStorageFileRelativePathExists().then(value=>{
+        this.getNestedMegaMenu().then((nestedMenu: any[]) => {
+          let DesktopJSON = this.util_GenerateDesktopJSON(nestedMenu);
+          let MobileJson = this.util_GenerateMobileJSON(nestedMenu);
+          let outputJSON = {
+            OutputDesktopJSON: DesktopJSON,
+            OutputMobileJSON: MobileJson
+          };
+          return outputJSON;
+        }).then((outputJSON) => {
+          let storageServerRelativePath=this.context.pageContext.site.serverRelativeUrl + this.properties.megaMenuJsonFileRelativeUri;
+          if(storageServerRelativePath.lastIndexOf('/')==storageServerRelativePath.length-1) {
+            storageServerRelativePath=storageServerRelativePath.substr(0,storageServerRelativePath.length-1);
+          }
+          pnp.sp.web.getFolderByServerRelativePath(storageServerRelativePath).files.add(this.properties.megaMenuJsonFileName, JSON.stringify(outputJSON)).then((result) => {
+            resolve(true);
+          }, (error) => {
+            reject(strings.CatDsgSpExt1001ExportMegaMenuFailedMessage);
+          });
         }, (error) => {
-           reject(error);
+          reject(strings.CatDsgSpExt1001ExportMegaMenuFailedToRetrieveDataFromList);
         });
-      }, (error) => {
-        reject(strings.CatDsgSpExt1001ExportMegaMenuFailedMessage);
-      });
+      },error=>{
+        resolve(error);
+      });  
     });
   }
-
   protected getNestedMegaMenu(): Promise<any[]> {
     return new Promise<any[]>((resolve, reject) => {
       this.getMegaMenu().then((megaMenus: IMegaMenu[]) => {
@@ -142,7 +146,6 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
 
     });
   }
-
   protected getMegaMenu(): Promise<IMegaMenu[]> {
     return new Promise<IMegaMenu[]>((resolve, reject) => {
       // Need to be replace with  for production purpose
@@ -182,9 +185,7 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
         reject(strings.CatDsgSpExt1001ExportMegaMenuListNameRequired);
       }
     });
-
   }
-
   protected IsTargetMegaMenuList(): Promise<any> {
     return pnp.sp.web.getList(this.context.pageContext.list.serverRelativeUrl).get().then(list => {
       if (list) {
@@ -195,7 +196,57 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
       }
       return false;
     }, (error) => {
+      Log.info(LOG_SOURCE, error);
       return false;
+    });
+  }
+  protected MakesureMegaMenuJsonStorageFileRelativePathExists(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      let relativeUrl =this.properties.megaMenuJsonFileRelativeUri;
+      if (relativeUrl.indexOf('/') == 0) {
+        relativeUrl = relativeUrl.substr(1, relativeUrl.length - 1);
+      }
+      if (relativeUrl.lastIndexOf('/') == relativeUrl.length - 1) {
+        relativeUrl = relativeUrl.substr(0, relativeUrl.length - 1);
+      }
+      var folders = relativeUrl.split('/');
+      let allPromises: Promise<boolean>[] = [];
+
+      for (var i = 0; i <= folders.length - 1; i++) {
+        allPromises.push(this.createFolder(folders.slice(0, i).join('/'), folders[i]));
+      }
+      let result = Promise.resolve(true);
+      allPromises.forEach((p) => {
+        result = result.then((value) => {
+          return p;
+        },error=>{
+          Log.info(LOG_SOURCE, error);
+        });
+      });
+      result.then(value => {
+        resolve(true);
+      }, error => {
+        reject(error);
+      }
+      );
+    });
+  }
+  protected createFolder(parentFolderRelativePath: string, folderName: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      if (parentFolderRelativePath.indexOf('/') == 0) {
+        parentFolderRelativePath = parentFolderRelativePath.substr(1, parentFolderRelativePath.length - 1);
+      }
+      let folderServerRelativePath = this.context.pageContext.site.serverRelativeUrl + '/' + parentFolderRelativePath + ((folderName != null && folderName != '') ? ('/' + folderName) : '');
+      let parentFolderServerRelativePath = this.context.pageContext.site.serverRelativeUrl + '/' + parentFolderRelativePath;
+      pnp.sp.web.getFolderByServerRelativePath(folderServerRelativePath).get().then((result) => {
+        resolve(true);
+      }, (error) => {
+        pnp.sp.web.getFolderByServerRelativePath(parentFolderServerRelativePath).folders.add(folderName).then((result) => {
+          resolve(true);
+        }, (error) => {
+          reject(strings.CatDsgSpExt1001ExportMegaMenuFailedToCreateStorageFolder + folderServerRelativePath);
+        });
+      });
     });
   }
 
