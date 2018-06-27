@@ -4,23 +4,27 @@
   "https": true,
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://catsysdemo.sharepoint.com/sites/fusedevrogerzhangmegamenu004",
+      "pageUrl": "https://catsysdemo.sharepoint.com/sites/fusedevrogerzhangmegamenu004/Lists/MegaMenu/AllItems.aspx",
       "customActions": {
         "9f1019ee-a6b3-4f24-b1b5-106fccad202f": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
+          "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
           "properties": {
-            "megaMenuListName": "MegaMenu"
+            "megaMenuListName": "MegaMenu",
+            "megaMenuJsonFileRelativeUri":"/catdsgspcustomer/data",
+            "megaMenuJsonFileName":"catDsgSp-js-megamenu-json.js"
           }
         }
       }
     },
-    "catDsgSpExt1001MegaMenuDataModel": {
+    "catDsgSpExt1001ExportMegaMenu": {
       "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
       "customActions": {
         "9f1019ee-a6b3-4f24-b1b5-106fccad202f": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
+          "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
           "properties": {
-            "megaMenuListName": "MegaMenu"
+            "megaMenuListName": "MegaMenu",
+            "megaMenuJsonFileRelativeUri":"/catdsgspcustomer/data",
+            "megaMenuJsonFileName":"catDsgSp-js-megamenu-json.js"
           }
         }
       }

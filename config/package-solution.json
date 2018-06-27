@@ -1,17 +1,17 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "Catapult Systems - Mega Menu Data Model",
+    "name": "Catapult Systems - Export Mega Menu",
     "id": "5bd500ea-9f1b-4242-96cc-5f58db3fe230",
-    "version": "1.0.0.7",
-    "includeClientSideAssets": false,
+    "version": "1.0.0.2",
+    "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "features": [
       {
-        "title": "Mega Menu data Model",
-        "description": "Mega Menu data Model used to add mega menu columns/content types/list instance",
+        "title": "Mega Menu Provision",
+        "description": "add mega menu columns/content types/list instance",
         "id": "ffb9d2ef-5a30-4c3e-b7fa-33b6cea15ad3",
-        "version": "1.0.0.7",
+        "version": "1.0.0.2",
         "assets": {
           "elementManifests": [
             "elements.xml"
@@ -24,6 +24,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/cat-dsg-sp-ext-1001-mega-menu-data-model.sppkg"
+    "zippedPackage": "solution/cat-dsg-sp-ext-1001-mega-menu-provision.sppkg"
   }
 }

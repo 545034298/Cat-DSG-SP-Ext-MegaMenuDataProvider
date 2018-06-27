@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "cat-dsg-sp-ext-1001-mega-menu-data-model-application-customizer": {
+    "cat-dsg-sp-ext-1001-export-mega-menu-command-set": {
       "components": [
         {
-          "entrypoint": "./lib/extensions/catDsgSpExt1001MegaMenuDataModel/CatDsgSpExt1001MegaMenuDataModelApplicationCustomizer.js",
-          "manifest": "./src/extensions/catDsgSpExt1001MegaMenuDataModel/CatDsgSpExt1001MegaMenuDataModelApplicationCustomizer.manifest.json"
+          "entrypoint": "./lib/extensions/catDsgSpExt1001ExportMegaMenu/CatDsgSpExt1001ExportMegaMenuCommandSet.js",
+          "manifest": "./src/extensions/catDsgSpExt1001ExportMegaMenu/CatDsgSpExt1001ExportMegaMenuCommandSet.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "CatDsgSpExt1001MegaMenuDataModelApplicationCustomizerStrings": "lib/extensions/catDsgSpExt1001MegaMenuDataModel/loc/{locale}.js"
+    "CatDsgSpExt1001ExportMegaMenuCommandSetStrings": "lib/extensions/catDsgSpExt1001ExportMegaMenu/loc/{locale}.js"
   }
 }
