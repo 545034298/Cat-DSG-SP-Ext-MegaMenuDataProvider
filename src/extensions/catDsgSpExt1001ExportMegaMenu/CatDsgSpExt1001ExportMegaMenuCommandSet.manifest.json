@@ -16,8 +16,10 @@
   "requiresCustomScript": false,
   "items": {
     "CATDSGSPCOMMAND_EXPORTMEGAMENU": {
-      "title": { "default": "Publish MegaMenu JSON" },
-      "iconImageUrl": "icons/request.png",
+      "title": { 
+        "default": "Publish MegaMenu JSON",
+        "zh-cn":"发布超级菜单文件" },
+      "iconImageUrl": "./export.svg",
       "type": "command"
     }
   }

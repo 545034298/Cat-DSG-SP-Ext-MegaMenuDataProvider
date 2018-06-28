@@ -5,7 +5,7 @@ declare interface ICatDsgSpExt1001ExportMegaMenuCommandSetStrings {
   CatDsgSpExt1001ExportMegaMenuListNameRequired:string;
   CatDsgSpExt1001ExportMegaMenuFailedToCreateStorageFolder:string;
   CatDsgSpExt1001ExportMegaMenuFailedToUpload:string;
-  CatDsgSpExt1001ExportMegaMenuFailedToRetrieveDataFromList:string
+  CatDsgSpExt1001ExportMegaMenuFailedToRetrieveDataFromList:string;
 }
 
 declare module 'CatDsgSpExt1001ExportMegaMenuCommandSetStrings' {
