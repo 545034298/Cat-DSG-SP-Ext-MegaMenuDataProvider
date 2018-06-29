@@ -6,6 +6,7 @@ define([], function() {
     "CatDsgSpExt1001ExportMegaMenuListNameRequired":"The mega menu list name should not be null or empty",
     "CatDsgSpExt1001ExportMegaMenuFailedToCreateStorageFolder":"Failed to create mega menu storage folder,pleae try again:",
     "CatDsgSpExt1001ExportMegaMenuFailedToRetrieveDataFromList":"Failed to retrieve data from mega list",
-    "CatDsgSpExt1001ExportMegaMenuFailedToUpload":"Failed to upload mega menu json file"
+    "CatDsgSpExt1001ExportMegaMenuFailedToUpload":"Failed to upload mega menu json file",
+    "CatDsgSpExt1001ExportMegaMenuNoData":"There have no data in mega menu list"
   }
 });

@@ -1,21 +1,6 @@
 <List xmlns:ows="Microsoft SharePoint" Title="Basic List" EnableContentTypes="TRUE" FolderCreation="false" Direction="$Resources:Direction;" Url="Lists/Basic List" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
-      <ContentType ID="0x0100B2C47C6727034C4B8B54B9725096850A" 
-                Name="CatDsgSp MegaMenu Navigation Link" 
-                Description="" 
-                Group="CatDsgSp Content Types">
-        <FieldRefs>
-            <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}"/>
-            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}"/>
-            <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}"  Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}"  Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{e3eb4bbe-aa02-4d40-ae8f-1afbab87854e}"  DisplayName="MegaMenu Open in New Window" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
-            <FieldRef ID="{29564685-6413-492c-90a3-9efc0cb8ccf2}"  DisplayName="MegaMenu Color" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
-            <FieldRef ID="{8410b679-5a75-421c-9f21-15d39a4388f4}"  DisplayName="MegaMenu Icon" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
-        </FieldRefs>
-    </ContentType>
-
     <ContentType ID="0x012000369E64E4632E664C943458C08457E03A" 
                 Name="CatDsgSp MegaMenu Level One Folder" 
                 Description="" 
@@ -24,7 +9,7 @@
             <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}" />
             <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" />
             <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
+            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
         </FieldRefs>
     </ContentType>
 
@@ -36,10 +21,25 @@
             <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}" />
             <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" />
             <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}"  Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
-            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
+            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
             <FieldRef ID="{67660157-8380-4e36-bfe7-b3f2b7f82d43}" Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
             <FieldRef ID="{29564685-6413-492c-90a3-9efc0cb8ccf2}"  DisplayName="MegaMenu Color" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
             <FieldRef ID="{8410b679-5a75-421c-9f21-15d39a4388f4}" DisplayName="MegaMenu Icon" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
+        </FieldRefs>
+    </ContentType>
+
+    <ContentType ID="0x0100B2C47C6727034C4B8B54B9725096850A" 
+                Name="CatDsgSp MegaMenu Navigation Link" 
+                Description="" 
+                Group="CatDsgSp Content Types">
+        <FieldRefs>
+            <FieldRef ID="{c042a256-787d-4a6f-8a8a-cf6ab767f12d}"/>
+            <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}"/>
+            <FieldRef ID="{7300c15b-d8db-4e11-ba4f-bfe02eb4ba6f}"  Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{5b76500d-5174-4a34-b683-22468a1da5ee}"  Required="TRUE" ShowInNewForm="TRUE" ShowInEditForm="TRUE" />
+            <FieldRef ID="{e3eb4bbe-aa02-4d40-ae8f-1afbab87854e}"  DisplayName="MegaMenu Open in New Window" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
+            <FieldRef ID="{29564685-6413-492c-90a3-9efc0cb8ccf2}"  DisplayName="MegaMenu Color" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
+            <FieldRef ID="{8410b679-5a75-421c-9f21-15d39a4388f4}"  DisplayName="MegaMenu Icon" Required="FALSE" ShowInNewForm="TRUE" ShowInEditForm="TRUE"/>
         </FieldRefs>
     </ContentType>
    </ContentTypes>

@@ -32,12 +32,12 @@ export interface IMegaMenuListItem {
   FileLeafRef: string;
   FileSystemObjectType: boolean;
   ServerUrl: string;
-  fuseMegaMenuSortOrder: number;
-  fuseMegaMenuColumnLocation: number;
-  fuseMegaMenuURL: ISharePointURL;
-  fuseMegaMenuOpenNewWindow: boolean;
-  fuseJSLinkColorPicker: string;
-  fuseJSLinkIconography: string;
+  catdsgspMegaMenuSortOrder: number;
+  catdsgspMegaMenuColumnLocation: number;
+  catdsgspMegaMenuURL: ISharePointURL;
+  catdsgspMegaMenuOpenNewWindow: boolean;
+  catdsgspJSLinkColorPicker: string;
+  catdsgspJSLinkIconography: string;
 }
 
 export interface IMegaMenu {
@@ -109,10 +109,10 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
             reject(strings.CatDsgSpExt1001ExportMegaMenuFailedMessage);
           });
         }, (error) => {
-          reject(strings.CatDsgSpExt1001ExportMegaMenuFailedToRetrieveDataFromList);
+          reject(error);
         });
       },error=>{
-        resolve(error);
+        reject(error);
       });  
     });
   }
@@ -138,7 +138,7 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
           resolve(nestedMegaMenus);
         }
         else {
-          resolve([]);
+          reject(strings.CatDsgSpExt1001ExportMegaMenuNoData);
         }
       }, (error) => {
         reject(error);
@@ -148,27 +148,26 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
   }
   protected getMegaMenu(): Promise<IMegaMenu[]> {
     return new Promise<IMegaMenu[]>((resolve, reject) => {
-      // Need to be replace with  for production purpose
-      let web = new Web('https://catsysdemo.sharepoint.com/sites/fusedemonorthstarprime');
+      let web = new Web(this.context.pageContext.site.absoluteUrl);
       if (this.properties.megaMenuListName != null && this.properties.megaMenuListName != '') {
         let list = web.lists.getByTitle(this.properties.megaMenuListName);
         let filterStrings = "ID eq 1 or ID gt 1";
-        let orderbyFieldName = 'fuseMegaMenuSortOrder';
+        let orderbyFieldName = 'catdsgspMegaMenuSortOrder';
         let isAscOrder = true;
-        list.items.select('FileLeafRef', 'ServerUrl', 'FileSystemObjectType', 'fuseJSLinkColorPicker', 'fuseJSLinkIconography', 'fuseMegaMenuOpenNewWindow', 'fuseMegaMenuURL', 'fuseMegaMenuColumnLocation', 'Title', 'fuseMegaMenuSortOrder').filter(filterStrings).orderBy(orderbyFieldName, isAscOrder).get().then((items: IMegaMenuListItem[]) => {
+        list.items.select('FileLeafRef','ServerUrl','catdsgspJSLinkColorPicker', 'catdsgspJSLinkIconography', 'catdsgspMegaMenuOpenNewWindow', 'catdsgspMegaMenuURL', 'catdsgspMegaMenuColumnLocation', 'Title', 'catdsgspMegaMenuSortOrder').filter(filterStrings).orderBy(orderbyFieldName, isAscOrder).get().then((items: any[]) => {
           if (items.length > 0) {
             let megaMenus = items.map((menu: IMegaMenuListItem) => {
               let megaMenu: IMegaMenu = {
                 Title: menu.Title,
-                Sort: menu.fuseMegaMenuSortOrder,
-                ColumnLocation: menu.fuseMegaMenuColumnLocation,
-                MenuURL: menu.fuseMegaMenuURL == null ? '' : menu.fuseMegaMenuURL.Url,
+                Sort: menu.catdsgspMegaMenuSortOrder,
+                ColumnLocation: menu.catdsgspMegaMenuColumnLocation,
+                MenuURL: menu.catdsgspMegaMenuURL == null ? '' : menu.catdsgspMegaMenuURL.Url,
                 ServerURL: menu.ServerUrl,
                 IsFolder: menu.FileSystemObjectType,
                 ItemLevel: menu.ServerUrl.split("/").length - 1,
-                Iconography: menu.fuseJSLinkIconography,
-                ColorPicker: menu.fuseJSLinkColorPicker,
-                OpenLinkInNewWindow: menu.fuseMegaMenuOpenNewWindow == null ? '_self' : (menu.fuseMegaMenuOpenNewWindow ? '_blank' : '_self')
+                Iconography: menu.catdsgspJSLinkIconography,
+                ColorPicker: menu.catdsgspJSLinkColorPicker,
+                OpenLinkInNewWindow: menu.catdsgspMegaMenuOpenNewWindow == null ? '_self' : (menu.catdsgspMegaMenuOpenNewWindow ? '_blank' : '_self')
               };
               return megaMenu;
             });
@@ -177,8 +176,8 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
           else {
             resolve([]);
           }
-        }, (error) => {
-          reject(error);
+        }, () => {
+          reject(strings.CatDsgSpExt1001ExportMegaMenuFailedToRetrieveDataFromList);
         });
       }
       else {
@@ -240,10 +239,10 @@ export default class CatDsgSpExt1001ExportMegaMenuCommandSet
       let parentFolderServerRelativePath = this.context.pageContext.site.serverRelativeUrl + '/' + parentFolderRelativePath;
       pnp.sp.web.getFolderByServerRelativePath(folderServerRelativePath).get().then((result) => {
         resolve(true);
-      }, (error) => {
+      }, () => {
         pnp.sp.web.getFolderByServerRelativePath(parentFolderServerRelativePath).folders.add(folderName).then((result) => {
           resolve(true);
-        }, (error) => {
+        }, () => {
           reject(strings.CatDsgSpExt1001ExportMegaMenuFailedToCreateStorageFolder + folderServerRelativePath);
         });
       });
