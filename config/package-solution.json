@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "Catapult Systems - Export Mega Menu",
+    "name": "Catapult Systems - Mega Menu Data Provider",
     "id": "5bd500ea-9f1b-4242-96cc-5f58db3fe230",
     "version": "1.0.0.2",
     "includeClientSideAssets": true,
@@ -24,6 +24,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/cat-dsg-sp-ext-1001-mega-menu-provision.sppkg"
+    "zippedPackage": "solution/cat-dsg-sp-ext-1001-mega-menu-data-provider.sppkg"
   }
 }

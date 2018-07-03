@@ -20,8 +20,8 @@ if(!$credential) {
 Write-Host "Connecting to site collection..."
 Connect-PnPOnline -Url $siteUrl -Credentials $credential
 
-$appFile = "..\sharepoint\solution\cat-dsg-sp-ext-1001-mega-menu-provision.sppkg"
-$appTitle = "Catapult Systems - Export Mega Menu"
+$appFile = "..\sharepoint\solution\cat-dsg-sp-ext-1001-mega-menu-data-provider.sppkg"
+$appTitle = "Catapult Systems - Mega Menu Data Provider"
 
 Write-Host "Getting App to see if app already uploaded to catalog..."
 $apps = Get-PnPApp -Scope $scope
